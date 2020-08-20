@@ -45,7 +45,6 @@ class _TimeZeroAppState extends State<TimeZeroApp> {
         home: StoreBuilder<AppState>(
           onInit: (store) {
             // store.dispatch(loadUserData());
-            print('onInit of store finished');
           },
           builder: (BuildContext context, Store<dynamic> store) => Home(
             store: store,

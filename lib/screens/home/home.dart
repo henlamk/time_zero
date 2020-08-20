@@ -28,43 +28,44 @@ class _HomeState extends State<Home> {
     return StoreConnector(
       converter: (Store<AppState> store) => _ViewModel.create(store),
       builder: (BuildContext context, _ViewModel model) => Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: model.onStart,
-              child: Container(
-                child: Icon(Icons.play_arrow, size: 75),
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                    color: CustomColors.info,
-                    borderRadius: BorderRadius.circular(10)),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: model.onStart,
+                child: Container(
+                  child: Icon(Icons.play_arrow, size: 75),
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      color: CustomColors.info,
+                      borderRadius: BorderRadius.circular(10)),
+                ),
               ),
-            ),
-            SizedBox(height: 24),
-            Text(
+              SizedBox(height: 24),
+              Text(
+                widget.store.state.timer.start != null
+                    ? DateFormat('hh:mm').format(widget.store.state.timer.start)
+                    : '00:00',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 24),
               widget.store.state.timer.start != null
-                  ? DateFormat('hh:mm').format(widget.store.state.timer.start)
-                  : '00:00',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 24),
-            widget.store.state.timer.start != null
-                ? Text(
-                    DateTime.now()
-                        .difference(widget.store.state.timer.start)
-                        .toString(),
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                : Container()
-          ],
+                  ? Text(
+                      DateFormat('hh:mm').format(DateTime.now()),
+                      // .difference(widget.store.state.timer.start)),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : Container()
+            ],
+          ),
         ),
       ),
     );
